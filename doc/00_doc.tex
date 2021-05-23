@@ -1,0 +1,53 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[english]{babel}
+\usepackage{float}
+\usepackage[colorlinks,linkcolor=black,bookmarksopen,bookmarksnumbered,backref]{hyperref}
+\usepackage{multirow}
+\usepackage[x11names,rgb,table,xcdraw]{xcolor}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage[a4paper]{geometry}
+\usepackage[acronym]{glossaries}
+
+\newcommand{\aqnote}[1]{ {\color{violet}\textbf{AQ:} #1 } }
+
+\include{acronyms}
+
+\lstset{
+  language=Verilog,
+  basicstyle=\ttfamily\small, 
+  keywordstyle=\color{purple}\bfseries,
+  stringstyle=\color{red},
+  commentstyle=\color{blue},
+  morecomment=[s][\color{blue}]{/**}{*/},
+  extendedchars=true, 
+  showspaces=false, 
+  showstringspaces=false, 
+  numbers=left,
+  numberstyle=\scriptsize,
+  breaklines=true, 
+  backgroundcolor=\color{cyan!3}, 
+  breakautoindent=true, 
+  captionpos=b,
+  xleftmargin=0pt,
+  tabsize=4,
+  frame=single
+}
+
+\title{RISCV processor in an \acrshort{fpga}}
+\author{Jose Luís Estragués \\ Andrea Querol \\ Guillem Ramírez \\ Joan Vinyals \\ Pablo Vizcaíno}
+\date{May 2021}
+% \institute[FIB, UPC]{Facultat d'Informàtica de Barcelona \\ Universitat Politècnica de Catalunya - BarcelonaTech \and Barcelona Supercomputing Center}
+
+\begin{document}
+\maketitle
+
+\clearpage
+
+
+\bibliographystyle{unsrt}
+\bibliography{99_ref}
+\end{document}
