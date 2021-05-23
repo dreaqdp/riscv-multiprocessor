@@ -15,4 +15,4 @@ clean_all: clean
 	latexmk -C
 
 run: 
-	atril *.pdf &> /dev/null &
+	xdg-open *.pdf &> /dev/null &
