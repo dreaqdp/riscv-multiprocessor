@@ -1,4 +1,4 @@
 [submodule "submodules/darkriscv"]
 	path = submodules/darkriscv
 	url = git@github.com:joanvyc/darkriscv.git
-	branch = dev
+	branch = dev_1
