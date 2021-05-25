@@ -21,6 +21,7 @@
 \setbeamertemplate{page number in head/foot}[totalframenumber]
 
 \newcommand{\aqnote}[1]{ {\color{violet}\textbf{AQ:} #1 } }
+\newcommand{\gnunote}[1]{ {\color{blue}\textbf{GNU:} #1 } }
 
 \begin{document}
 
@@ -34,7 +35,32 @@
 \end{frame}
 
 \section{RISCV}
-\begin{frame}{RISCV introduction}
+\begin{frame}{RISC-V introduction}
+  \begin{itemize}
+     \item Open standard instruction set architecture (ISA)
+     \item Reduced instruction set computer (RISC)
+     \item Designed by University of California, Berkeley. 
+     \item Industry relevant:
+       \begin{itemize}
+         \item European Processor Initiative (EPI): RISC-V based european processor.
+       \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{RISC-V ISA details}
+  \begin{itemize}
+     \item Implements privileged and unprivileged ISA.
+     \item 32 general purpose registers (16 in embedded)
+     \item Minimal instruction set required. Extensions provide additional functionality:
+       \begin{itemize}
+         \item \textbf{M:} Multiplication
+         \item \textbf{A:} Atomics
+         \item \textbf{F, D, Q:} Floating point in 32, 64 and 128 bit respectively.
+         \item \textbf{Zicsr:} Control and status register support.
+         \item \textbf{Zifencei:} Load/Store fence
+         \item \textbf{C:} Compressed instructions.
+       \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \section{\acrshort{fpga}}
