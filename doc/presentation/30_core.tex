@@ -9,14 +9,31 @@
 \end{frame}
 
 \begin{frame}{Core - First try: Ariane}
-	\begin{itemize}
-		\item Boots Linux.
-		\item Multi-Core capable.
-		\item Open design.
-	\end{itemize}
+    \begin{itemize}
+            \item Boots Linux.
+            \item Multi-Core capable.
+            \item Open design.
+    \end{itemize}
 
-	\begin{alertblock}{Issue}
-		Too complex and too much effort to port the design to be compatible with our FPGA.	
-	\end{alertblock}
+    \begin{alertblock}{Issue}
+            Too complex and too much effort to port the design to be compatible with our FPGA.	
+    \end{alertblock}
 \end{frame}
 
+\begin{frame}{Core - Second try: Rocket Chip}
+  \begin{itemize}
+    \item \gls{soc} generator based on Rocket scalar cores.
+    \item Multi-core system capable with option to add coherent memory systems.
+    \item Boots Linux.
+    \item Open source.
+  \end{itemize}
+
+  \begin{alertblock}{Issue}
+    Scala based configuration. Lack of documentation. Not clear on how to generate a bitstream for our \gls{fpga}.
+  \end{alertblock}
+\end{frame}
+
+
+\begin{frame}{Core - Final selection: Darkriscv}
+
+\end{frame}
