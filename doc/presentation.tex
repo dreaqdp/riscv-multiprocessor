@@ -20,6 +20,13 @@
 
 \setbeamertemplate{page number in head/foot}[totalframenumber]
 
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
 \newcommand{\aqnote}[1]{ {\color{violet}\textbf{AQ:} #1 } }
 \newcommand{\gnunote}[1]{ {\color{blue}\textbf{GNU:} #1 } }
 
@@ -73,6 +80,17 @@
                 \item \aqnote{posar resources (?) justificacio de decisions de disseny mes endavant}
             \end{itemize}
     \end{itemize}
+\end{frame}
+
+\section{Core}
+\begin{frame}{Core - Selection criteria}
+  \begin{itemize}
+    \item Multicore capable design.
+    \item Linux bootable.
+    \item Open/accessible design.
+    \item Fit resource constraints of our fpga. 
+    \item Maximize compatibility with our fpga.
+  \end{itemize}
 \end{frame}
 
 \section*{}
