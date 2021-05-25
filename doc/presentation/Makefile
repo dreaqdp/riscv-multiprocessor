@@ -1,12 +1,8 @@
 
 all: presentation
 
-doc: 
-	latexmk -g -pdf 00_doc.tex
-
-
 presentation: 
-	latexmk -g -pdf presentation.tex
+	latexmk -g -pdf 00_presentation.tex
 
 clean:
 	latexmk -c

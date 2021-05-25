@@ -1,0 +1,67 @@
+\documentclass[xcolor=table]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[acronym]{glossaries}
+\usepackage{appendixnumberbeamer}
+\usepackage{caption} % captionof for figures
+
+\usetheme{Dresden}
+\usecolortheme{lily}
+
+\input{../common/acronyms}
+
+\title{RISCV processor in an \acrshort{fpga}}
+\author{Jose Estragues \\ Andrea Querol \\ Guillem Ramírez \\ Joan Vinyals \\ Pablo Vizcaino}
+\date{May 2021}
+\institute[FIB, UPC]{Facultat d'Informàtica de Barcelona \\ Universitat Politècnica de Catalunya - BarcelonaTech \and Barcelona Supercomputing Center}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\newcommand{\aqnote}[1]{ {\color{violet}\textbf{AQ:} #1 } }
+\newcommand{\gnunote}[1]{ {\color{blue}\textbf{GNU:} #1 } }
+
+\begin{document}
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+
+\begin{frame}{}
+    \tableofcontents
+\end{frame}
+
+\section{RISCV}
+\input{10_riscv.tex}
+
+\section{\acrshort{fpga}}
+\input{20_fpga.tex}
+
+\section{Core}
+\input{30_core.tex}
+
+\section*{}
+
+\begin{frame}[allowframebreaks]
+        \frametitle{References}
+\bibliographystyle{unsrt}
+\bibliography{../common/99_ref}
+\end{frame}
+
+
+\begin{frame}{}
+    \centering
+    \Large Thanks for your attention.
+\end{frame}
+
+\end{document}
