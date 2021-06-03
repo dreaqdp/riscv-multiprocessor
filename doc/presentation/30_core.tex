@@ -85,6 +85,9 @@ Rocket Chip is a SoC generator for Rocket Cores
     \end{itemize}
     \item Tested on similar \gls{fpga} boards.
   \end{itemize}
+  \begin{exampleblock}{Approach}
+    Add multicore support and boot parallel programs.
+  \end{exampleblock}
 \end{frame}
 
 \begin{frame}{Core - Darkriscv}
@@ -92,7 +95,7 @@ Rocket Chip is a SoC generator for Rocket Cores
  \begin{center}
     \begin{tikzpicture}[node distance=0.4cm]
       \node (prj) [stylepop] {Create Vivado project};
-      \node (const) [stylepop, right=of prj ] {Design constraint file};
+      \node (const) [stylepop, right=of prj ] {Design constraints file};
       \node (blk) [stylepop, right=of const] {Block design};
       \node (bit) [stylepop, right=of blk] {Generate bitstream};
 
@@ -106,7 +109,8 @@ Rocket Chip is a SoC generator for Rocket Cores
 \begin{frame}{Core - Darkriscv block design}
   Block design:
   \begin{itemize}
-    \item Xilinx clock IP for our \gls{fpga}.
+    \item Map the \gls{fpga} clock to Xilinx clock IP to manage the core clock.
+    \item Bind reset button to core reset.
     \item Bind core leds to physical leds.
   \end{itemize}
  \begin{center}
