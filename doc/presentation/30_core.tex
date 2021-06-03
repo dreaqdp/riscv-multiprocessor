@@ -9,6 +9,25 @@
 \end{frame}
 
 \begin{frame}{Core - First try: Ariane}
+\begin{columns}[T]
+  \begin{column}{0.5\textwidth} % Left column and width
+
+\begin{itemize}
+    \item Ariane is a 6-stage in-order CPU
+    \item Implements privilege levels M, S, U to fully support a Unix-like operating system
+    \item 
+\end{itemize}
+\end{column}
+\begin{column}{.5\textwidth} % Right column and width
+
+\begin{figure}[!ht]
+    \includegraphics[width=1\linewidth]{images/rocketchip-diagram.png}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Core - First try: Ariane}
     \begin{itemize}
             \item Boots Linux.
             \item Multi-Core capable.
@@ -18,6 +37,31 @@
     \begin{alertblock}{Issue}
             Too complex and too much effort to port the design to be compatible with our FPGA.	
     \end{alertblock}
+\end{frame}
+
+
+
+\begin{frame}{RISC-V: Rocket Chip}
+\begin{columns}[T]
+  \begin{column}{0.5\textwidth} % Left column and width
+Rocket Chip is a SoC generator for Rocket Cores
+\begin{itemize}
+    \item Developed in Berkley, EEUU
+    \item Hardware generation is done using Chisel
+    \item Rocket core: 
+    \begin{itemize}
+        \item In-order scalar processor with 5-stage pipeline
+        \item RV64G variant of the RISC-V ISA
+    \end{itemize}
+\end{itemize}
+\end{column}
+\begin{column}{.5\textwidth} % Right column and width
+
+\begin{figure}[!ht]
+    \includegraphics[width=1\linewidth]{images/rocketchip-diagram.png}
+\end{figure}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Core - Second try: Rocket Chip}
@@ -35,5 +79,8 @@
 
 
 \begin{frame}{Core - Final selection: Darkriscv}
-
+  \begin{itemize}
+    \item Low resource utilisation.
+    \item Simple design. Implements 
+  \end{itemize}
 \end{frame}
