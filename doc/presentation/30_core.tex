@@ -3,8 +3,8 @@
     \item Multicore capable design.
     \item Linux bootable.
     \item Open/accessible design.
-    \item Fit resource constraints of our fpga. 
-    \item Maximize compatibility with our fpga.
+    \item Fit resource constraints of our \gls{fpga}. 
+    \item Maximize compatibility with our \gls{fpga}.
   \end{itemize}
 \end{frame}
 
@@ -13,15 +13,15 @@
   \begin{column}{0.5\textwidth} % Left column and width
 
 \begin{itemize}
-    \item Ariane is a 6-stage in-order CPU
-    \item Implements privilege levels M, S, U to fully support a Unix-like operating system
-    \item 
+    \item Ariane is a 6-stage in-order CPU.
+    \item Implements privilege levels M, S, U to fully support a Unix-like operating system.
+    \item Multicore via OpenPiton.
 \end{itemize}
 \end{column}
 \begin{column}{.5\textwidth} % Right column and width
 
 \begin{figure}[!ht]
-    \includegraphics[width=1\linewidth]{images/rocketchip-diagram.png}
+    \includegraphics[width=1.1\linewidth]{images/ariane-diagram.png}
 \end{figure}
 \end{column}
 \end{columns}
@@ -35,13 +35,11 @@
     \end{itemize}
 
     \begin{alertblock}{Issue}
-            Too complex and too much effort to port the design to be compatible with our FPGA.	
+            Too complex and too much effort to port the design to be compatible with our \gls{fpga}.	
     \end{alertblock}
 \end{frame}
 
-
-
-\begin{frame}{RISC-V: Rocket Chip}
+\begin{frame}{Core - Second try: Rocket Chip}
 \begin{columns}[T]
   \begin{column}{0.5\textwidth} % Left column and width
 Rocket Chip is a SoC generator for Rocket Cores
@@ -66,14 +64,13 @@ Rocket Chip is a SoC generator for Rocket Cores
 
 \begin{frame}{Core - Second try: Rocket Chip}
   \begin{itemize}
-    \item \gls{soc} generator based on Rocket scalar cores.
     \item Multi-core system capable with option to add coherent memory systems.
     \item Boots Linux.
     \item Open source.
   \end{itemize}
 
   \begin{alertblock}{Issue}
-    Scala based configuration. Lack of documentation. Not clear on how to generate a bitstream for our \gls{fpga}.
+    Scala based configuration. Lack of documentation. High \gls{fpga} resource usage. Not clear on how to generate a bitstream for our \gls{fpga}.
   \end{alertblock}
 \end{frame}
 
@@ -81,6 +78,40 @@ Rocket Chip is a SoC generator for Rocket Cores
 \begin{frame}{Core - Final selection: Darkriscv}
   \begin{itemize}
     \item Low resource utilisation.
-    \item Simple design. Implements 
+    \item Simple design.
+    \begin{itemize}
+      \item Implements RISC-V 32 bit: \textbf{E} and \textbf{I} extensions.
+      \item \gls{rtl} designed in 3 files. 
+    \end{itemize}
+    \item Tested on similar \gls{fpga} boards.
   \end{itemize}
+\end{frame}
+
+\begin{frame}{Core - Darkriscv}
+  Deployment process:
+ \begin{center}
+    \begin{tikzpicture}[node distance=0.4cm]
+      \node (prj) [stylepop] {Create Vivado project};
+      \node (const) [stylepop, right=of prj ] {Design constraint file};
+      \node (blk) [stylepop, right=of const] {Block design};
+      \node (bit) [stylepop, right=of blk] {Generate bitstream};
+
+      \draw [arrow] (prj) -- (const);
+      \draw [arrow] (const) -- (blk);
+      \draw [arrow] (blk) -- (bit);
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Core - Darkriscv block design}
+  Block design:
+  \begin{itemize}
+    \item Xilinx clock IP for our \gls{fpga}.
+    \item Bind core leds to physical leds.
+  \end{itemize}
+ \begin{center}
+\begin{figure}[!ht]
+    \includegraphics[width=1\linewidth]{images/block-design.png}
+\end{figure}
+  \end{center}
 \end{frame}
