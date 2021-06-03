@@ -74,7 +74,7 @@
       \end{enumerate}
     \end{column}
     \begin{column}{0.33\textwidth}
-      \textbf{WAITING:}\\
+      \textbf{WAIT\_DATA:}\\
       %Ignore all petitions.\\
       if $mem.valid==1$:
       \begin{enumerate}
@@ -148,23 +148,23 @@ leds=[0 0 0 0], flag0=0, flag1=0.
 \end{figure}
 \end{frame}
 
-\begin{frame}{FLAG test with two cores: Simulation}
-\begin{figure}
-    \centering
-    \includegraphics[width=11cm]{images/flag2_sim_crop.png}
-    %\caption{Caption}
-    \label{fig:my_label}
-\end{figure}
-\end{frame}
-
-\begin{frame}{FLAG test with two cores: Simulation}
-\begin{figure}
-    \centering
-    \includegraphics[width=11cm]{images/flag2_sim_crop_arrows.png}
-    %\caption{Caption}
-    \label{fig:my_label}
-\end{figure}
-\end{frame}
+%\begin{frame}{FLAG test with two cores: Simulation}
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=11cm]{images/flag2_sim_crop.png}
+%    %\caption{Caption}
+%    \label{fig:my_label}
+%\end{figure}
+%\end{frame}
+%
+%\begin{frame}{FLAG test with two cores: Simulation}
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=11cm]{images/flag2_sim_crop_arrows.png}
+%    %\caption{Caption}
+%    \label{fig:my_label}
+%\end{figure}
+%\end{frame}
 
 % \begin{frame}{FLAG test with two cores: Simulation}
 % \begin{figure}
@@ -238,17 +238,17 @@ leds=[0 0 0 0], flag0=0, flag1=0.
 \end{figure}
 \end{frame}
 
-\begin{frame}{FLAG test with four cores: Simulation}
-\begin{figure}
-    \centering
-    \includegraphics[width=11cm]{images/flag4_sim_good_crop.png}
-    %\caption{Caption}
-    \label{fig:my_label}
-\end{figure}
-\end{frame}
+%\begin{frame}{FLAG test with four cores: Simulation}
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=11cm]{images/flag4_sim_good_crop.png}
+%    %\caption{Caption}
+%    \label{fig:my_label}
+%\end{figure}
+%\end{frame}
 
-\begin{frame}{Axpy multicore}
-axpy: $\sum_{i=0}^{n}{v_{i} * u_{i}}$
+\begin{frame}{Dot product multicore}
+Dot product: $\sum_{i=0}^{n}{v_{i} * u_{i}}$
 \vspace{0.2cm}
 \begin{enumerate}
     \item Barrier after initialization
@@ -271,7 +271,7 @@ axpy: $\sum_{i=0}^{n}{v_{i} * u_{i}}$
 
 \end{frame}
 
-\begin{frame}{Axpy with 4 cores: Simulation}
+\begin{frame}{Dot product with 4 cores: Simulation}
 \begin{figure}
     \centering
     \includegraphics[width=11cm]{images/axpy_sim4_crop.png}
@@ -280,7 +280,7 @@ axpy: $\sum_{i=0}^{n}{v_{i} * u_{i}}$
 \end{figure}
 \end{frame}
 
-\begin{frame}{Axpy with 4 cores: Simulation}
+\begin{frame}{Dot product with 4 cores: Simulation}
 \begin{figure}
     \centering
     \includegraphics[width=11cm]{images/axpy_sim4_crop_arrow.png}
@@ -289,7 +289,7 @@ axpy: $\sum_{i=0}^{n}{v_{i} * u_{i}}$
 \end{figure}
 \end{frame}
 
-\begin{frame}{Axpy with 8 cores: Simulation}
+\begin{frame}{Dot product with 8 cores: Simulation}
 \begin{figure}
     \centering
     \includegraphics[width=11cm]{images/axpy_sim8_crop.png}
