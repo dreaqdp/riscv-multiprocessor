@@ -7,14 +7,19 @@
 \usepackage[acronym]{glossaries}
 \usepackage{appendixnumberbeamer}
 \usepackage{caption} % captionof for figures
+\usepackage{tikz}
+\usetikzlibrary{trees,positioning,arrows}
+
+\tikzstyle{stylepop} = [rectangle, rounded corners, minimum width=1cm, minimum height=2cm,text centered,text width=2.2cm, draw=black, fill=white]
+\tikzstyle{arrow} = [thick,->,>=stealth]
 
 \usetheme{Dresden}
 \usecolortheme{lily}
 
 \input{../common/acronyms}
 
-\title{RISCV processor in an \acrshort{fpga}}
-\author{Jose Estragues \\ Andrea Querol \\ Guillem Ramírez \\ Joan Vinyals \\ Pablo Vizcaino}
+\title{RISC-V processor in an \acrshort{fpga}}
+\author{Jose L. Estragués, Andrea Querol, Guillem Ramírez, Joan Vinyals, Pablo Vizcaino}
 \date{May 2021}
 \institute[FIB, UPC]{Facultat d'Informàtica de Barcelona \\ Universitat Politècnica de Catalunya - BarcelonaTech \and Barcelona Supercomputing Center}
 
