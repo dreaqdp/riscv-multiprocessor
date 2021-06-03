@@ -2,7 +2,7 @@
 all: presentation
 
 presentation: 
-	latexmk -g -pdf 00_presentation.tex
+	latexmk -g  -pdf 00_presentation.tex
 
 clean:
 	latexmk -c
