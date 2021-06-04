@@ -1,0 +1,34 @@
+\begin{frame}{DDR3}
+    \begin{itemize}
+        \item Integration with FPGA DDR3
+        \item Xilinx IP Memory Interface Generation (MIG 7 Series)
+    \begin{itemize}
+        \item Controller and physical layer (PHY)
+        \item User app - \gls{axi} - DDR3 SRAM device
+    \end{itemize}
+        \item \gls{axi} \cite{axi}: Standard industry protocol
+    \end{itemize}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/axi.png}
+        \caption{\gls{axi} handshake.}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Block design}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1.0\textwidth]{images/bd_ddr.png}
+        \caption{Block design with MIG.}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Validation}
+    \begin{itemize}
+        \item Simulation with Vivado
+        \item User app + MIG
+        
+    \end{itemize}
+\end{frame}
+

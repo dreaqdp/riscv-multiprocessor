@@ -1,6 +1,6 @@
 \documentclass[xcolor=table]{beamer}
 \usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
+\usepackage[english]{babel}
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -21,7 +21,7 @@
 \title{RISC-V processor in an \acrshort{fpga}}
 \author{Jose L. Estragués, Andrea Querol, Guillem Ramírez, Joan Vinyals, Pablo Vizcaino}
 \date{May 2021}
-\institute[FIB, UPC]{Facultat d'Informàtica de Barcelona \\ Universitat Politècnica de Catalunya - BarcelonaTech \and Barcelona Supercomputing Center}
+\institute[FIB, UPC]{Facultat d'Informàtica de Barcelona \\ Universitat Politècnica de Catalunya - BarcelonaTech}
 
 \setbeamertemplate{page number in head/foot}[totalframenumber]
 
@@ -49,22 +49,31 @@
 \section{RISCV}
 \input{10_riscv.tex}
 
-\section{\acrshort{fpga}}
+\section{FPGA}
 \input{20_fpga.tex}
 
 \section{Core}
 \input{30_core.tex}
 
+\section{Datapath}
+\input{40_datapath.tex}
+
 \section{Referee}
-\input{70_referee.tex}
+\input{50_referee.tex}
+
+\section{DDR3}
+\input{60_ddr3.tex}
+
+\section{Conclusions}
+\input{70_conclusion.tex}
 
 \section*{}
 
-\begin{frame}[allowframebreaks]
-        \frametitle{References}
-\bibliographystyle{unsrt}
-\bibliography{../common/99_ref}
-\end{frame}
+% \begin{frame}[allowframebreaks]
+%         \frametitle{References}
+% \bibliographystyle{unsrt}
+% \bibliography{../common/99_ref}
+% \end{frame}
 
 
 \begin{frame}{}
