@@ -1,2 +1,129 @@
 \section{Referee}
 
+%Justification
+\subsection{Justification} \label{referee-justification}
+Once we had defined the datapath of the core, we were ready to expand our singlecore design into a multicore.
+We can duplicate the datapath, including the ROM, to generate as many cores as we desire, but if we want them to communicate with each other through memory we will need to implement a shared memory design.
+
+But we can't just create a single memory and connect all the cores to it.
+The original \textit{Darkriscv} design assumed an instantaneous memory which could complete read and write operations without delay.
+Since we now have $N$ cores accessing the memory, some will need to wait in the case of simulatenous accesses, since we plan to serialize them.
+
+
+%Behaviour
+\subsection{Behaviour} \label{referee-behaviour}
+We created a module called \textit{Referee}, which works as an interface between $N$ cores and the memory.
+Its purpose is to grant access from the cores to the memory, halting the cores that must wait their turn to access it.
+In a way, from the side of the memory it acts as a single core, so the memory is agnostic of the real number of cores.
+
+%figure with inputs and outputs!
+
+The \textit{Referee} treats read and write operations the same way. 
+For simplicity, we will refer to a \textit{petition} when we want to address both read and write operations.
+If many cores send a petition at the same time, the \textit{Referee} chooses the one from the core with the highest ID, halts all the requesting cores, sens the petition to the memory and waits for its answer. 
+If more cores try to access memory while an old petition is being served, the \textit{Referee} halts them.
+When the memory finishes serving the petition, the core releases (unhalts) its associated core and serves the next petition.
+
+%Verification
+\subsection{Verification}
+
+Once the module was designed, the next step was to test if it was working correctly.
+The first test was to set the number of cores to 2 and run a very simple code where they light up leds alternatively.
+
+%figure of code
+\label{2led-code}
+
+In Figure~\ref{2led-code} we can find the pseudocode that both cores are running and a scheme of the expected behaviour.
+Core 0 lights up the first led, signals core 1 to light up the second one and then to signal core 0 again to light up the third led.
+Figure~\ref{2led-sim} shows the simulation of this code.
+We see how core 0 lights up the first led and wait some cycles before setting flag0 to 1, while core1 is repeatedly reading the value of this flag.
+Then, the same happens changing the roles of core0 and core1.
+
+%figure of simulation
+\label{2led-sim}
+
+We can also zoom in to see an example of how the \textit{Referee} is working in this example. In Figure~\ref{2led-sim} we can see how core 0 tries to write while core 1 is waiting the memory to complete a read petition. 
+The \textit{Referee} halts core 0 and doesn't send his petition until the read is finished.
+
+%figure of zoom
+\label{2led-close}
+
+Once we checked that this simple code was also working in the FPGA, we tried to complicate the design a little bit more.
+We increased the number of cores from 2 to 4 and ran a very similar code, depicted in Figure~\ref{4led-code}. Core $i$ lights up led $i$ and signals core $i+1$ to to the same.
+
+%figure of code
+\label{4led-code}
+
+We simulated the code and found that it got stuck in an infinite deadlock.
+In Figure~\ref{4led-sim-bad} we can see how core 0 never gets his petition served.
+Since core 0 is the first core to signal the next cores to do their work, they will keep reading the value of a flag that will never change.
+
+\label{4led-sim-bad}
+
+In Section~\ref{referee-behaviour} we mentioned that the \textit{Referee} the core with the highest ID, if multiple were trying to access memory. 
+This explains what we see in Figure~\ref{4led-sim-bad}.
+At any point where the petition from core0 is considered, a petition from a higher ID core is also active, so it doesn't get a chance to access memory.
+
+To solve this, we changed how the served core is selected.
+The \textit{Referee} has a register which tells it which core to serve. 
+When it receives multiple petitions, it will always serve that core first if it is among the requesting cores.
+If this is not the case, it selects the highest ID core from the rest.
+After any petition, the register holding the prioritized core is increased.
+This method ensures that all cores will get a chance to access memory, with a wait time of at most $N-1$ petitions in the worst case (i.e. when the core tries to access memory just after its turn has passed).
+
+%figure showing this behaviour?
+
+After implemeting this new logic, we simulated the same code from Figure~\ref{4led-code} again and saw that everything was working as expected and the leds followed the desired pattern.
+
+Finally, we tested a more realistic code.
+We selected the \textit{dot product}, since it is really easily paralelized.
+Remember that given two vector $v$ and $u$ of $n$ elements, the dot product is defined as $\sum_{i=0}^{n}{v_{i} * u_{i}}$.
+
+In this case we coded in C instead of in assembly, so we can also test how our design behaves when we don't manually pick the instructions but instead we use a compiler.
+The code follows these steps:
+
+\begin{enumerate}
+	\item Core 0 initializes the vectors to known values.
+	\item All cores synchronize in a barrier.
+	\item Every core computes its part of the sum ($\frac{n}{Ncores}$).
+	\item In a reduction, each core accumulates its result in the same memory position.
+\end{enumerate}
+
+While most of the code can be done with plain C, we had to do some tweaks.
+At the start of the program, the stack pointer is manually set to an aribitrary position for each core, directly modifying the $sp$ register.
+Furthermore, the global variables used to hold the vectors, synchronization flags and counters, and the final result are all pointers to an arbitrary position starting at 0x40000000, which is the start of the memory region where we decided to put the data.
+
+%Figure of stack initializing?
+
+The most interesting parts of the code are the barrier and the reduction, which work in a very similar way.
+Both are formed with a flag and a counter, which are both initialized at 0.
+When core 0 arrives to the barrier, it sets the flag to 1 and sets the counter to $Ncores - 1$.
+All cores except core 0 will wait until the flag is set and the counter is equal to their ID.
+When that happens, they decrement the counter so the next core can do the same.
+Then, the last core to exit the barrier resets it for future use.
+The reduction works exactly the same, but with each core updating the content of the reduction variable when it is their turn. 
+It is important to note that in order for this code to work, each core has two registers hardcoded to its core ID and the total number of cores.
+
+%Figure of barrier
+
+In Figure~\ref{4dot-sim} we see the simulation of the dot product with 4 cores.
+We can see how core 0 initializes the vectors while the rest wait in the barrier until its flag its set to 1 and the counter decreases to 0.
+Then, all cores compute their work, accesing their part of the vector, and wait until core 0 starts the reduction.
+Here, the same behaviour as in the barrier is found, until the correct result of 14 is generated.
+
+\label{4dot-sim}
+
+We have also simulated it with 8 cores to show that the code is Ncores-agnostic, as it can be seen in Figure~\ref{8dot-sim}.
+The barrier and the reduction are longer, but the same result is obtained.
+
+\label{8dot-sim}
+
+
+
+
+
+
+
+
+
+
