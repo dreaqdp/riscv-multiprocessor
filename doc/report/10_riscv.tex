@@ -29,8 +29,58 @@ In the following table, the ISA modules are listed and described:
 \hline
 \textbf{Name} & \textbf{Description} & \textbf{Status}  & \textbf{Ins. Count}  \\ \hline
 
+RVWMO & Weak Memory Ordering & Ratified & \\ \hline
+RV32I & Base Integer Instruction set (32 bits) & Ratified & 49 \\ \hline
+RV32E & Base Integer Instruction set embedded & Open & 49 \\ \hline
+RV64I & Base Integer Instruction set (64 bits) & Ratified & 14 \\ \hline
+RV128I & Base Integer Instruction set (128 bits) & Open & 14 \\ \hline
+
 \end{tabular}
-\caption{Mètriques models Exponent.} Mètriques de rendiment i error dels models que aproximen el càlcul de l'exponent.
+\caption{RISC-V base ISA modules.} 
 \end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Name} & \textbf{Description} & \textbf{Status}  & \textbf{Ins. Count}  \\ \hline
+
+M & Multiplication Division & Ratified & 8\\ \hline
+A & Atomic Instruction & Ratified & 11 \\ \hline
+F & Single precision FP & Ratified & 25 \\ \hline
+D & Double precision FP & Ratified & 25 \\ \hline
+Q & Quad precision FP & Ratified & 27 \\ \hline
+C & Compressed Instruction & Ratified & 36 \\ \hline
+Zicsr & Control and Status Register (CSR) & Ratified &  \\ \hline
+Zifencei & Instruction-Fetch Fence & Ratified & \\ \hline
+\end{tabular}
+\caption{RISC-V popular ISA extensions.} 
+\end{table}
+
+Required ISA modules it is a characteristic to evaluate possible RISC-V cores depending on the functionalitis the developers want to offer. 
+
+\subsection{Registers}
+RISC-V cores tipically have 32 integer registers and 32 floating point registers when this extension is implemented. Each register has its functionality that is a consense of the RISC-V developers. This is the method to keep information consistent and meaningful. It is critical to 
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Register name} & \textbf{Symbolic name} & \textbf{Description}  & \textbf{Ins. Count}  \\ \hline
+
+M & Multiplication Division & Ratified & 8\\ \hline
+A & Atomic Instruction & Ratified & 11 \\ \hline
+F & Single precision FP & Ratified & 25 \\ \hline
+D & Double precision FP & Ratified & 25 \\ \hline
+Q & Quad precision FP & Ratified & 27 \\ \hline
+C & Compressed Instruction & Ratified & 36 \\ \hline
+Zicsr & Control and Status Register (CSR) & Ratified &  \\ \hline
+Zifencei & Instruction-Fetch Fence & Ratified & \\ \hline
+\end{tabular}
+\caption{RISC-V popular ISA extensions.} 
+\end{table}
+
 
 
