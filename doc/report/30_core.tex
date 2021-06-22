@@ -29,7 +29,7 @@ The main issue we encountered when trying to deploy the core was generating the 
 \subsection{Rocketchip}
 Rocketchip is a \gls{soc} generator designed at the University of Berkeley, California \cite{rocket}. From a configuration, it generates the full implementation, including multiple cores, caches and coherence protocol. It uses Chisel\footnote{\url{https://github.com/chipsalliance/chisel3}} as \gls{hdl}, a Scala-based language for \gls{asic} and \gls{fpga} logic designs. It implements the RISCV64G \gls{isa} variant. It is capable of booting Linux and allow different multicore configurations.
 
-Figure \ref{fig:rocketstruct} shows \gls{soc} structure. The Rocketchip uses Rocket, BOOM or Zscale cores as a basic unit. Each core has its L1 data and instruction caches and a RoCC coprocessor. These units (Tiles) are interconnected using Tilelink, which interconnects the tiles with the level two cache. Tilelink is flexible and allows different cache coherence protocols. Finally, an \gls{axi} bridge connects the Tilelink module with the \gls{axi} crossbar, enabling the cores to access various devices and peripherals such as the \gls{dram}, IO devices.
+Figure \ref{fig:rocketstruct} shows \gls{soc} structure. The Rocketchip uses Rocket, BOOM or Zscale cores as a basic unit. Each core has its L1 data and instruction caches and a RoCC coprocessor. These units (Tiles) are interconnected using Tilelink, which interconnects the tiles with the level two cache. Tilelink is flexible and allows different cache coherence protocols. Finally, an \gls{axi} bridge connects the Tilelink module with the \gls{axi} crossbar, enabling the cores to access various devices and peripherals such as the \gls{dram}, \gls{io} devices.
 
 \begin{figure}[h]
   \centering
