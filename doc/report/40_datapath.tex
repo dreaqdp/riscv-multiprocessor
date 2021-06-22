@@ -8,7 +8,7 @@ separate the different functionalities of the core into distinct modules.
 
 \subsection{Modules}
 
-Creating four modules in total; the program counter (PC), the fetch (or
+We created four modules in total; the program counter (PC), the fetch (or
 instruction memory controller), the ALU/BR (for Arithmetic Logic Unit and
 Register Bank) and the memory (or data memory controller). These modules will
 expect their inputs to be stable and valid when its \textit{en} (abbreviation of
@@ -117,14 +117,14 @@ double functionality and is used in two separate stages. Firstly in the
 processing (ALU) of all the data of the current instruction. And finally on the
 writeback, where all the necessary data is written back to the register file (BR).
 
-In figure \ref{fig:datapath_mods} we can see the diagram that represents the explained modules and
+In Figure \ref{fig:datapath_mods} we can see the diagram that represents the explained modules and
 their data flow with the controller management.
 
 \subsection{Memory managment}
 
 Furthermore, we had to implement a memory bus selector
 in order to multiplex between the two modules that make memory access. This
-logic is controlled by the datapath--ass in figure~\ref{fig:datapath_mem}--.
+logic is controlled by the datapath--as in Figure~\ref{fig:datapath_mem}--.
 Its implementation is easy the selector chooses the fetch module based on the
 datapath stage. And disables the bus when neither the fetch nor the memory
 stage is being executed.
@@ -186,8 +186,8 @@ stage is being executed.
 
 Once the memory is out of the core the bus is intercepted by the memory mapper,
 this module will manage, depending on the access address, the device that
-should receive the petition. As shown in the figure~\ref{fig:memory_map} de
-first 512 MiB are assign to the ROM holding the code. The ROM is inside the module itself
+should receive the petition. As shown in the Figure~\ref{fig:memory_map} the
+first 512 MiB are assigned to the ROM holding the code. The ROM is inside the module itself
 and is replicated for every core. Whereas, on the other hand, the last 3 GiB
 are assigned to the RAM, which is an external device\footnote{In this case external 
 device means that it is outside the core and memory map modules, but not external
