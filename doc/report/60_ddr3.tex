@@ -1,9 +1,9 @@
 \section{\acrshort{ddr}}
 \subsection{Justification}
-After implementing and validating a multicore and referee design, the next step that we faced was replacing the \textit{fake} memory with the \gls{fpga}'s \gls{ddr}.
+After implementing and validating a multi-core and referee design, the next step that we faced was replacing the \textit{fake} memory with the \gls{fpga}'s \gls{ddr}.
 
 As mentioned in Section \ref{sec:fpga}, \gls{sp7} has an integrated \gls{ddr} memory of 4 Gb.
-We wanted to connect our current dual-core \gls{rtl} to \gls{ddr} since memory was a one with dummy cycles to simulate memory delay. 
+We wanted to connect our current multi-core \gls{rtl} to \gls{ddr} since memory was a one with dummy cycles to simulate memory delay. 
 So, we would have not to simulate a memory, but to deal with a real one.
 
 
@@ -33,7 +33,7 @@ It is composed by a master interface and a slave interface.
     \label{fig:axi}
 \end{figure}
 
-Information can be composed by many signal, the \texttt{data} one is the minimum one that has to be included.
+Information can be composed by many signals, the \texttt{data} one is the minimum one that has to be included.
 Other signals can be added to \gls{axi} transactions in order to codify other information, such as the address.
 
 \subsubsection{\acrshort{mig}}
@@ -78,11 +78,11 @@ The result is the block design that can be seen in Figure \ref{fig:bd_mig}, wher
         \label{fig:bd_mig}
     \end{figure}
 
-\subsection{Validation}
-The first validation step was with the Vivado simulator. 
-\gls{mig} allows the simulation of the user app (our \gls{rtl} dual-core) and the \gls{ip} itself.
+\subsection{Verification}
+The first verification step was with the Vivado simulator. 
+\gls{mig} allows the simulation of the user app (our \gls{rtl} multi-core) and the \gls{ip} itself.
 
-We adapted the testbench provided by Xilinx to connect our dual core. 
+We adapted the testbench provided by Xilinx to connect our multi-core. 
 We ran the simulation and we detected that it was not simulating anything.
 Some signals from the default waveform (the one provided in first intance by the \gls{ip} simulation) had a \texttt{Z} value, which means that they were not connected well.
 
