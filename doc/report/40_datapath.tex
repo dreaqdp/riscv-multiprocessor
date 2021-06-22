@@ -3,7 +3,7 @@
 
 Darkriscv was simple in terms of the file hierarchy, but its internal structure
 was not so trivial. For the reason of understanding the code accordingly and
-preparing it for the next step--explained in section~\ref{sec:referee}--. We decided to
+preparing it for the next step --explained in section~\ref{sec:referee}--. We decided to
 separate the different functionalities of the core into distinct modules.
 
 \subsection{Modules}
@@ -12,8 +12,8 @@ We created four modules in total; the program counter (PC), the fetch (or
 instruction memory controller), the ALU/BR (for Arithmetic Logic Unit and
 Register Bank) and the memory (or data memory controller). These modules will
 expect their inputs to be stable and valid when its \textit{en} (abbreviation of
-enable) signal is set to high--for one cycle--and until it sets its \textit{valid}
-signal high--for one cycle--. The module will hold its output signals until the
+enable) signal is set to high --for one cycle-- and until it sets its \textit{valid}
+signal high --for one cycle--. The module will hold its output signals until the
 enable is set high again.
 
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
@@ -113,8 +113,8 @@ enable is set high again.
 All the \textit{en} signals are managed by the datapath, which uses five stages.
 Each stage only uses one module. The datapath will choose to go to the next
 stage once the current module in use sets \textit{valid} to high. The ALU/BR module has
-double functionality and is used in two separate stages. Firstly in the
-processing (ALU) of all the data of the current instruction. And finally on the
+double functionality and is used in two separate stages. Firstly, in the
+processing (ALU) of all the data of the current instruction. And finally, on the
 writeback, where all the necessary data is written back to the register file (BR).
 
 In Figure \ref{fig:datapath_mods} we can see the diagram that represents the explained modules and
@@ -124,8 +124,8 @@ their data flow with the controller management.
 
 Furthermore, we had to implement a memory bus selector
 in order to multiplex between the two modules that make memory access. This
-logic is controlled by the datapath--as in Figure~\ref{fig:datapath_mem}--.
-Its implementation is easy the selector chooses the fetch module based on the
+logic is controlled by the datapath --as in Figure~\ref{fig:datapath_mem}--.
+Its implementation is easy, the selector chooses the fetch module based on the
 datapath stage. And disables the bus when neither the fetch nor the memory
 stage is being executed.
 
@@ -184,17 +184,17 @@ stage is being executed.
 
 \end{figure}
 
-Once the memory is out of the core the bus is intercepted by the memory mapper,
+Once the memory is out of the core, the bus is intercepted by the memory mapper,
 this module will manage, depending on the access address, the device that
 should receive the petition. As shown in the Figure~\ref{fig:memory_map} the
-first 512 MiB are assigned to the ROM holding the code. The ROM is inside the module itself
+first 512 MiB are assigned to the Read Only Memory (ROM) holding the code. The ROM is inside the module itself
 and is replicated for every core. Whereas, on the other hand, the last 3 GiB
-are assigned to the RAM, which is an external device\footnote{In this case external 
+are assigned to the Random Access Memory (RAM), which is an external device\footnote{In this case external 
 device means that it is outside the core and memory map modules, but not external
-to the FPGA.}.
+to the \gls{fpga}.}.
 
 It is important to mention that although the processor is able to execute code
-from RAM it is not optimized for that.
+9from RAM it is not optimized for that.
 
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
 
