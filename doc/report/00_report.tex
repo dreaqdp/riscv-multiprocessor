@@ -20,12 +20,15 @@
 
 \input{../common/acronyms}
 
+\definecolor{myorange}{RGB}{170,80,10}
+\definecolor{myblue}{RGB}{120,100,180}
+\definecolor{mygreen}{RGB}{80,115,75}
 \lstset{
-  language=Verilog,
+  language=C,
   basicstyle=\ttfamily\small, 
-  keywordstyle=\color{purple}\bfseries,
-  stringstyle=\color{red},
-  commentstyle=\color{blue},
+  keywordstyle=\color{myorange}\bfseries,
+  stringstyle=\color{mygreen},
+  commentstyle=\color{myblue},
   morecomment=[s][\color{blue}]{/**}{*/},
   extendedchars=true, 
   showspaces=false, 
@@ -33,7 +36,7 @@
   numbers=left,
   numberstyle=\scriptsize,
   breaklines=true, 
-  backgroundcolor=\color{cyan!3}, 
+  backgroundcolor=\color{gray!4}, 
   breakautoindent=true, 
   captionpos=b,
   xleftmargin=0pt,

@@ -11,7 +11,7 @@ The original \textit{Darkriscv} design assumed an instantaneous memory that coul
 
 %Behaviour
 \subsection{Behaviour} \label{referee-behaviour}
-We created a module called \textit{Referee}, which works as an interface between $N$ cores and the memory.
+We created a module calLED \textit{Referee}, which works as an interface between $N$ cores and the memory.
 Its purpose is to grant access from the cores to the memory, halting the cores that must wait their turn to access it.
 In a way, it acts as a single core from the memory side, so the memory is agnostic of the actual number of cores.
 A simplified diagram of this module can be seen in Figure~\ref{referee-fig}.
@@ -19,7 +19,7 @@ A simplified diagram of this module can be seen in Figure~\ref{referee-fig}.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=.5\textwidth]{images/Referee_fig.png}
-    \caption{Simplified diagram of the Referee}
+    \caption{Simplified diagram of the Referee.}
     \label{referee-fig}
 \end{figure}
 
@@ -33,17 +33,17 @@ When the memory finishes serving the petition, the core releases (unhalts) its a
 \subsection{Verification}
 Once the module was designed, the next step was to test if it was working correctly.
 In order to generate codes, we first write them with either assembly inline or C.
-After that, we compile it with a modified gcc supporting riscv found in the RISC-V Tools~\cite{tools} and then we use Objdump to obtain the hexadecimal codification of the instructions.
+After that, we compile it with a modified \textit{gcc} supporting RISC-V found in the RISC-V Tools~\cite{tools} and then we use \textit{Objdump} to obtain the hexadecimal codification of the instructions.
 This process is exemplified in Figure~\ref{coding}.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=.9\textwidth]{images/coding.png}
-    \caption{Generating codes for Darkriscv}
+    \caption{Generating codes for Darkriscv.}
     \label{coding}
 \end{figure}
 
-Finally, the hexadecimal instructions are written in a file that acts as a ROM, embedded in the FPGA when generating the bitstream, or simply read when simulating.
+Finally, the hexadecimal instructions are written in a file that acts as a ROM, embedded in the \gls{fpga} when generating the bitstream, or simply read when simulating.
 
 The first test was to set the number of cores to 2 and run a straightforward code where they light up LEDs alternatively.
 
@@ -54,11 +54,11 @@ The first test was to set the number of cores to 2 and run a straightforward cod
 \begin{minipage}[t][4cm][t]{4.5cm}
 \textbf{Core 0}\\
 while(1)\{\\
-\hspace*{1cm}leds = [0 0 0 1];\\
+\hspace*{1cm}LEDs = [0 0 0 1];\\
 \hspace*{1cm}flag0 = 1;\\
 \hspace*{1cm}while(!flag1);\\
 \hspace*{1cm}flag1 = 0;\\
-\hspace*{1cm}leds = [0 1 0 0];\\
+\hspace*{1cm}LEDs = [0 1 0 0];\\
 \}
 \end{minipage}\hspace{2.5cm}
 \begin{minipage}[t][4cm][t]{4.5cm}
@@ -66,97 +66,98 @@ while(1)\{\\
 while(1)\{\\
 \hspace*{1cm}while(!flag0);\\
 \hspace*{1cm}flag0 = 0;\\
-\hspace*{1cm}leds = [0 0 1 0];\\
+\hspace*{1cm}LEDs = [0 0 1 0];\\
 \hspace*{1cm}flag1 = 1;\\
 \}
 \end{minipage}%
 \vspace{.1cm}
-\includegraphics[width=.75\textwidth]{images/leds2_fig.png}
-\caption{Pseudocode of the test code with 2 processors}
-\label{2led-code}
+\includegraphics[width=.75\textwidth]{images/LEDs2_fig.png}
+\caption{Pseudocode of the test code with 2 processors.}
+\label{2LED-code}
 \end{figure}
 \clearpage
-In Figure~\ref{2led-code} we can find the pseudocode that both cores are running and a scheme of the expected behaviour.
-Core 0 lights up the first led, signals core 1 to light up the second one and then to signal core 0 again to light up the third led.
+In Figure~\ref{2LED-code} we can find the pseudocode that both cores are running and a scheme of the expected behaviour.
+Core 0 lights up the first LED, signals core 1 to light up the second one and then to signal core 0 again to light up the third LED.
 
-Figure~\ref{2led-sim} shows the simulation of this code.
-We see how core 0 lights up the first led and waits some cycles before setting flag0 to 1, while core1 repeatedly reads the value of this flag.
-Then, the same happens, changing the roles of core0 and core1.
+Figure~\ref{2LED-sim} shows the simulation of this code.
+We see how core 0 lights up the first LED and waits some cycles before setting flag0 to 1, while core 1 repeatedly reads the value of this flag.
+Then, the same happens, changing the roles of core 0 and core 1.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1.0\textwidth]{images/flag2_sim_crop_arrows.png}
-    \caption{Simulation of the code depicted in Figure~\ref{2led-code}}
-    \label{2led-sim}
+    \caption{Simulation of the code depicted in Figure~\ref{2LED-code}.}
+    \label{2LED-sim}
 \end{figure}
 
 
-We can also zoom in to see an example of how the \textit{Referee} is working in this example. In Figure~\ref{2led-close} we can see how core 0 tries to write while core 1 is waiting for the memory to complete a read petition.
+We can also zoom in to see an example of how the \textit{Referee} is working in this example. In Figure~\ref{2LED-close} we can see how core 0 tries to write while core 1 is waiting for the memory to complete a read petition.
 The \textit{Referee} halts core 0 and does not send his petition until the read is finished.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{images/flag2_sim_close_arrow.png}
-    \caption{Simulation showing the serialitzation of memory accesses by the referee}
-    \label{2led-close}
+    \caption{Simulation showing the serialitzation of memory accesses by the referee.}
+    \label{2LED-close}
 \end{figure}
 
-Once we checked that this simple code was also working in the FPGA, we tried to complicate the design a little bit more.
-We increased the number of cores from 2 to 4 and ran a very similar code, depicted in Figure~\ref{4led-code}. Core $i$ lights up led $i$ and signals core $i+1$ to to the same.
+Once we checked that this simple code was also working in the \gls{fpga}, we tried to complicate the design a little bit more.
+We increased the number of cores from 2 to 4 and ran a very similar code, depicted in Figure~\ref{4LED-code}.
+Core $i$ lights up LED $i$ and signals core $i+1$ to the same.
 
 \begin{figure}[htbp]
 \centering
-\begin{minipage}[t][3cm][t]{3cm}
+\begin{minipage}[t][3cm][t]{3.2cm}
 \textbf{Core 0}\\
 while(1)\{\\
 \hspace*{.4cm}while(flag!=0);\\
-\hspace*{.4cm}leds=[0 0 0 1];\\
+\hspace*{.4cm}LEDs=[0 0 0 1];\\
 \hspace*{.4cm}flag=1;\\
 \}
 \end{minipage}\hspace{.5cm}
-\begin{minipage}[t][3cm][t]{3cm}
+\begin{minipage}[t][3cm][t]{3.2cm}
 \textbf{Core 1}\\
 while(1)\{\\
 \hspace*{.4cm}while(flag!=1);\\
-\hspace*{.4cm}leds=[0 0 1 0];\\
+\hspace*{.4cm}LEDs=[0 0 1 0];\\
 \hspace*{.4cm}flag=2;\\
 \}
 \end{minipage}\hspace{.5cm}
-\begin{minipage}[t][3cm][t]{3cm}
+\begin{minipage}[t][3cm][t]{3.2cm}
 \textbf{Core 2}\\
 while(1)\{\\
 \hspace*{.4cm}while(flag!=2);\\
-\hspace*{.4cm}leds=[0 1 0 0];\\
+\hspace*{.4cm}LEDs=[0 1 0 0];\\
 \hspace*{.4cm}flag=4;\\
 \}
 \end{minipage}\hspace{.5cm}
-\begin{minipage}[t][3cm][t]{3cm}
+\begin{minipage}[t][3cm][t]{3.2cm}
 \textbf{Core 3}\\
 while(1)\{\\
 \hspace*{.4cm}while(flag!=4);\\
-\hspace*{.4cm}leds=[1 0 0 0];\\
+\hspace*{.4cm}LEDs=[1 0 0 0];\\
 \hspace*{.4cm}flag=0;\\
 \}
 \end{minipage}
-\includegraphics[width=.72\textwidth]{images/leds4_fig.png}
-\caption{Pseudocode of the test code with 4 processors}
-\label{4led-code}
+\includegraphics[width=.72\textwidth]{images/LEDs4_fig.png}
+\caption{Pseudocode of the test code with 4 processors.}
+\label{4LED-code}
 \end{figure}
 
 We simulated the code and found that it got stuck in an infinite deadlock.
-In Figure~\ref{4led-sim-bad} we can see how core 0 never gets his petition served.
+In Figure~\ref{4LED-sim-bad} we can see how core 0 never gets his petition served.
 Since core 0 is the first core to signal the next cores to do their work, they will keep reading the value of a flag that will never change.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1.0\textwidth]{images/flag4_sim_bad_crop_arrow.png}
-    \caption{Simulation showing the memory hog problem}
-    \label{4led-sim-bad}
+    \caption{Simulation showing the memory hog problem.}
+    \label{4LED-sim-bad}
 \end{figure}
 
 In Section~\ref{referee-behaviour} we mentioned that the \textit{Referee} prioritizes the core with the highest ID, if multiple were trying to access memory.
-This explains what we see in Figure~\ref{4led-sim-bad}.
-At any point where the petition from core0 is considered, a petition from a higher ID core is also active, so it does not get a chance to access memory.
+This explains what we see in Figure~\ref{4LED-sim-bad}.
+At any point where the petition from core 0 is considered, a petition from a higher ID core is also active, so it does not get a chance to access memory.
 
 To solve this, we changed how the served core is selected.
 The \textit{Referee} has a register holding the prioritized core to serve.
@@ -167,7 +168,7 @@ This method ensures that all cores will get a chance to access memory, with a wa
 
 %figure showing this behavior?
 
-After implementing this new logic, we simulated the same code from Figure~\ref{4led-code} again and saw that everything was working as expected and the LEDs followed the desired pattern.
+After implementing this new logic, we simulated the same code from Figure~\ref{4LED-code} again and saw that everything was working as expected and the LEDs followed the desired pattern.
 
 Finally, we tested a more realistic code.
 We selected the \textit{dot product}, since it is really easily parallelized.
@@ -185,22 +186,50 @@ The code follows these steps:
 While most of the code can be done with plain C, we had to do some tweaks.
 At the program's start, the stack pointer is manually set to an arbitrary position for each core, directly modifying the $sp$ register.
 This is exemplified in Figure~\ref{stackfig}.
-Furthermore, the global variables used to hold the vectors, synchronization flags, counters, and the final result are all pointers to an arbitrary position starting at 0x40000000, which is the start of the memory region to put the data.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=.6\textwidth]{images/stack_ini.png}
-    \caption{Initialization of the stack for multiple cores}
+    \begin{lstlisting}
+asm volatile(
+	"lui sp, 0x80000\t\n" //set up base stack
+	"slli t0, tp, 7\t\n" //t0 = coreID*128
+	"add sp, sp, t0\t\n" //sp = sp + t0;
+);
+    \end{lstlisting}
+%    \includegraphics[width=.6\textwidth]{images/stack_ini.png}
+    \caption{Initialization of the stack for multiple cores.}
     \label{stackfig}
 \end{figure}
+
+Furthermore, the global variables used to hold the vectors, synchronization flags, counters, and the final result are all pointers to an arbitrary position starting at 0x40000000, which is the start of the memory region to put the data.
 
 The most interesting parts of the code are the barrier and the reduction, which work similarly.
 In Figure~\ref{barrier} we show the code used for the barrier.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=.9\textwidth]{images/barrier.png}
-    \caption{Code snippet of the implemented barrier}
+    %\includegraphics[width=.9\textwidth]{images/barrier.png}
+    \begin{lstlisting}
+static inline void barrier(int ID, int ncores, volatile int * counter, volatile int * flag){
+	//start barrier
+	if (ID==0){
+		//wait for previous barrier to end
+		while (*(counter) != 0);
+		*(counter) = ncores-1;
+		*(flag) = 1;
+	}
+	//wait in barrier
+	while (*(flag) == 0); //wait for counter
+	while (*(counter) != ID); //wait for turn
+	int tmpcounter = *(counter);
+	if (tmpcounter==0){//last core to exit barrier resets it
+		*(flag) = 0;
+	}else{
+		*(counter) = tmpcounter-1; //decrease the barrier flag (next turn)
+	}
+}
+    \end{lstlisting}
+    \caption{Code snippet of the implemented barrier.}
     \label{barrier}
 \end{figure}
 
@@ -223,19 +252,18 @@ Here, the same behavior as in the barrier is found until the correct result of 1
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1.0\textwidth]{images/axpy_sim4_crop_arrow.png}
-    \caption{Simulation of the dot product with 4 cores}
+    \includegraphics[width=1\textwidth]{images/axpy_sim4_crop_arrow.png}
+    \caption{Simulation of the dot product with 4 cores.}
     \label{4dot-sim}
 \end{figure}
 
 We have also simulated it with 8 cores to show that the code is Ncores-agnostic, as can be seen in Figure~\ref{8dot-sim}.
 The barrier and the reduction are longer, but the same result is obtained.
 
-\newpage
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1.0\textwidth]{images/axpy_sim8_crop.png}
-    \caption{Simulation of the dot product with 8 cores}
+    \includegraphics[width=.9\textwidth]{images/axpy_sim8_crop.png}
+    \caption{Simulation of the dot product with 8 cores.}
     \label{8dot-sim}
 \end{figure}
 
