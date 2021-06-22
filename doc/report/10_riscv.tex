@@ -1,27 +1,27 @@
-\section{RISCV}
+\section{RISC-V}
 
-RISC-V is an open standard instruction set architecture (ISA) based in the reduced instruction set computer (RISC) architecture. This architecture is based on a small and higly optimized instructions in contrast with other types of architectures like the complex instruction set computer (CISC). The RISC-V ISA does not require fees to use and several companies and projects  are considering this architecture to developt their products. In addition, open source operating systems with RISC-V support are available and the instruction set is supported in several popular software toolchains. Load-store architecture and IEEE-754 floating point instructions. 
+RISC-V is an open standard instruction set architecture (ISA) based in the reduced instruction set computer (RISC) architecture. This architecture is based on a small and highly optimized instructions in contrast with other types of architectures like the complex instruction set computer (CISC). The RISC-V ISA does not need fees to use and several companies and projects  are considering this architecture to develop their products. In addition, open source operating systems with RISC-V support are available and the instruction set is supported in several popular software toolchains. Load-store architecture and IEEE-754 floating point instructions. \\
 
 \subsection{History}
 
-Prof. Krste Asanović and graduate students Yunsup Lee and Andrew Waterman started the RISC-V instruction set in May 2010 as part of the Parallel Computing Laboratory (Par Lab) at UC Berkeley, California.  The initial porpouse of RISC-V was to offer a open source hardware that could be used for academic porpouse and it could be deployable in any hardware or software design without royalties.\\
+Prof. Krste Asanović and graduate students Yunsup Lee and Andrew Waterman started the RISC-V instruction set in May 2010 as part of the Parallel Computing Laboratory (Par Lab) at UC Berkeley, California. The initial purpose of the RISC - V was to offer an open source hardware that could be used for academic purposes and it could be deployable in any hardware or software design without royalties.\\
 
-The architecture has as a precedent the DLX MIPS isntruction set by David Patterson. David Patterson joined the project and wasthe originator of the Berkeley RISC. RISC-V is the fifth generation of a serie of cooperative RISC-based research projects. The authors and their institutions originally sourced the ISA documents and several CPU designs which would allow derivative work to be reather open and free or close and propety. The ISA specification was published in 2011  with all rights reserved. \\
+The architecture has as a precedent the DLX MIPS instruction set by David Patterson. David Patterson joined the project and was the originator of the Berkeley RISC. RISC-V is the fifth generation of a series of cooperative RISC-based research projects. The authors and their institutions originally sourced the ISA documents and several CPU designs which would allow derivative work to be rather open and free or close and property. The ISA specification was published in 2011  with all rights reserved. \\
 
-RISC-V fundation was created to own, maintain, and publish intellectual property related to RISC-V's definition. Comercial users needed a stable ISA to develop products that would be used for years. For this reason, the authors and owners had to give their rights to the fundation. The fundation moved from US to Switzerland concerning the US trade conditions in 2019. Its named changed to RISC-V International  and since then they have freely published the documents defining RISC-V and permits unrestricted use of the ISA for design of software and hardware. However, changes can only be accepted by the members of the fundation. 
+RISC-V foundation was created to own, maintain, and publish intellectual property related to RISC-V's definition. Commercial users needed a stable ISA to develop products that would be used for years. For this reason, the authors and owners had to give their rights to the foundation. The foundation moved from US to Switzerland concerning the US trade conditions in 2019. Its named changed to RISC-V International and since then they have freely published the documents defining RISC-V and permits unrestricted use of the ISA for design of software and hardware. However, changes can only be accepted by the members of the foundation. \\
 
 \subsection{ISA base and extensions} 
-One of the more interesting carachteritics abour RISC-V is the modularity and this is reflected in the ISA extensions that consit in alternative base  and optional extensions. The base can implement a simplified general-purpose computer including compilers. It specifies: 
+One of the more interesting characteristics about RISC-V is the popularity and this is reflected in the ISA extensions that consist in alternative base and optional extensions. The base can implement a simplified general-purpose computer including compilers. It specifies: 
 
 \begin{itemize}
-	\item Instructions and their encodings
+	\item Instructions and their encoding
 	\item Control flow
 	\item Registers and their size
 	\item Memory and addressing
 	\item Logic manipulation
 \end{itemize}
 
-In the following table, the ISA modules are listed and described:
+In table \ref{tab:isa}, the ISA modules are listed and described:
 
 \begin{table}[H]
 \centering
@@ -29,22 +29,14 @@ In the following table, the ISA modules are listed and described:
 \hline
 \textbf{Name} & \textbf{Description} & \textbf{Status}  & \textbf{Ins. Count}  \\ \hline
 
+\multicolumn{4}{|c|}{\textbf{ISA base}} \\ \hline
 RVWMO & Weak Memory Ordering & Ratified & \\ \hline
 RV32I & Base Integer Instruction set (32 bits) & Ratified & 49 \\ \hline
 RV32E & Base Integer Instruction set embedded & Open & 49 \\ \hline
 RV64I & Base Integer Instruction set (64 bits) & Ratified & 14 \\ \hline
 RV128I & Base Integer Instruction set (128 bits) & Open & 14 \\ \hline
 
-\end{tabular}
-\caption{RISC-V base ISA modules.} 
-\end{table}
-
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|}
-\hline
-\textbf{Name} & \textbf{Description} & \textbf{Status}  & \textbf{Ins. Count}  \\ \hline
+\multicolumn{4}{|c|}{\textbf{ISA extensions}} \\ \hline
 
 M & Multiplication Division & Ratified & 8\\ \hline
 A & Atomic Instruction & Ratified & 11 \\ \hline
@@ -55,32 +47,47 @@ C & Compressed Instruction & Ratified & 36 \\ \hline
 Zicsr & Control and Status Register (CSR) & Ratified &  \\ \hline
 Zifencei & Instruction-Fetch Fence & Ratified & \\ \hline
 \end{tabular}
-\caption{RISC-V popular ISA extensions.} 
+\caption{RISC-V popular ISA modules.} 
+\label{tab:isa}
 \end{table}
 
-Required ISA modules it is a characteristic to evaluate possible RISC-V cores depending on the functionalitis the developers want to offer. 
+Required ISA modules it is a characteristic to evaluate possible RISC-V cores depending on the functionalities the developers want to offer.
 
 \subsection{Registers}
-RISC-V cores tipically have 32 integer registers and 32 floating point registers when this extension is implemented. Each register has its functionality that is a consense of the RISC-V developers. This is the method to keep information consistent and meaningful. It is critical to 
+RISC-V cores typically have 32 integer registers and 32 floating-point registers when this extension is implemented. Each register has its functionality that is a consensus of the RISC-V developers. This is the method to keep information consistent and meaningful. In \ref{tab:riscreg} we can see the registers' convention.
 
 
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Register name} & \textbf{Symbolic name} & \textbf{Description}  & \textbf{Ins. Count}  \\ \hline
-
-M & Multiplication Division & Ratified & 8\\ \hline
-A & Atomic Instruction & Ratified & 11 \\ \hline
-F & Single precision FP & Ratified & 25 \\ \hline
-D & Double precision FP & Ratified & 25 \\ \hline
-Q & Quad precision FP & Ratified & 27 \\ \hline
-C & Compressed Instruction & Ratified & 36 \\ \hline
-Zicsr & Control and Status Register (CSR) & Ratified &  \\ \hline
-Zifencei & Instruction-Fetch Fence & Ratified & \\ \hline
+\textbf{Register name} & \textbf{Symbolic name} & \textbf{Description}  & \textbf{Saved By}  \\ \hline
+\multicolumn{4}{|c|}{\textbf{Integer registers}} \\ \hline
+x0 & Zero & Always zero & \\ \hline
+x1 & ra & Return address & Caller \\ \hline
+x2 & sp & Stack Pointer & Callee \\ \hline
+x3 & gp & Global pointer &  \\ \hline
+x4 & tp & Thread pointer & Caller \\ \hline
+x5 & t0 & Temporary/ alternate return address & Caller \\ \hline
+x6-7 & t1-2  & Temporary & Caller \\ \hline
+x8 & s0/fp & Saved register/ frame pointer & Callee \\ \hline
+x9 & s1 & Saved register & Callee \\ \hline
+x10-11 & a0-1 & Function argument/ return value & Caller \\ \hline
+x12-17 & a2-7 & Function argument & Caller \\ \hline
+x18-27 & s2-11 & Saved register & Callee \\ \hline
+x28-31 & t3-6 & Temporary & Caller \\ \hline
+\multicolumn{4}{|c|}{\textbf{Floating-point extension registers}} \\ \hline
+f0-7 & ft0-7 & Floating-point temporaries & Caller \\ \hline
+f8-9 & fs0-1 & Floating-point saved & Callee \\ \hline
+f10-11 & fa0-1 & Floating-point arg/ return value & Caller \\ \hline
+f12-17 & fa2-7 & Floating-point arg & Caller \\ \hline
+f18-27 & fs2-11 & Floating-point saved registers & Callee \\ \hline
+f28-31 & ft8-11 & Floating-point temporaries & Caller \\ \hline
 \end{tabular}
-\caption{RISC-V popular ISA extensions.} 
+\caption{RISC-V registers.} 
+\label{tab:riscreg}
 \end{table}
 
+Basically, certain registers will be used depending on the role of the value that they will store. Temporary registers are used to store and work with values that we don't need after a function call. Saved registers will store the values that are relevant to save during the function calls.  Certain registers are also predefined to pass arguments, return values and stack pointers which helps with data consistency. Symbolic name is used to a more user-friendly assembler code. 
 
 
