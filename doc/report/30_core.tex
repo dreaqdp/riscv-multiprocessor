@@ -52,7 +52,7 @@ Darkriscv\cite{darkriscv} is a tiny and naive core that implements most of the R
 Its simplicity makes the design easy to understand, which enabled us to make the necessary modifications towards generating a bitstream for our \gls{fpga}.
 
 Figure \ref{fig:bitstream_gen} illustrates the bitstream generation process. 
-First, we create the Vivado project and import the source code files of Darkrsicv. Then we generate the constraints file, which maps between the hardware physical inputs and outputs to logical inputs and outputs for our code. In addition, we create the block design. Figure \ref{fig:block_design} shows the structure. We placed two blocks, a Xilinx Clock \gls{ip} for our board and the Darksoc block, which contains the core. Then we connected the Xilinx clock to the Darksoc clock, the physical reset button to the core reset, the core LEDs to the board physical LEDs and the system clock to the Xilinx clocking \gls{ip}.
+First, we create the Vivado project and import the source code files of Darkrsicv.  Then, we create the block design. Figure \ref{fig:block_design} shows the structure. We placed two blocks, a Xilinx Clock \gls{ip} for our board and the Darksoc block, which contains the core. Then we connected the Xilinx clock to the Darksoc clock, the physical reset button to the core reset, the core LEDs to the board physical LEDs and the system clock to the Xilinx clocking \gls{ip}. In addition, we generate the constraints file, which maps between the hardware physical inputs and outputs to logical inputs and outputs for our code and block design.
 
 \begin{figure}[h]
     \centering
