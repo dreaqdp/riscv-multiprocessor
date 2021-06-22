@@ -3,9 +3,9 @@
 \subsection{Selection criteria}
 The first step for developing the project is to select a suitable riscv implementation. Therefore, we defined the following guidelines for the decision:
 \begin{itemize}
-\item Multicore capable design.
+\item Multi-core capable design.
 \item Open or accessible design.
-\item The resource usage of the core must fit the capabilities of our \gls{fpga}. In addition, we must take into account that we are aiming for a multicore target. Therefore, resource usage is critical.
+\item The resource usage of the core must fit the capabilities of our \gls{fpga}. In addition, we must take into account that we are aiming for a multi-core target. Therefore, resource usage is critical.
 \item Maximize the compatibility with our \gls{fpga}. Each \gls{fpga} has its own devices and peripherals such as memory, clock, and ports. Hence we should look for designs that are well integrated with our device to ease the deployment of the core into our \gls{fpga}.
 \item As the project aims to boot something, we thought of finding a design that can boot Linux.
 \end{itemize}
@@ -13,7 +13,7 @@ The first step for developing the project is to select a suitable riscv implemen
 \subsection{Ariane}
 Ariane\cite{arianecore} is a 6 stage CPU initially developed at ETH Zurich. It fully supports I, A, M and C extensions which enable the core to boot Linux.
 
-The standalone design cannot be multicore. However, OpenPiton enables the design to be multicore. OpenPiton\cite{openpiton} is an Open Source framework for building scalable architecture research prototypes from 1 to 500 million cores.
+The standalone design cannot be multi-core. However, OpenPiton enables the design to be multi-core. OpenPiton\cite{openpiton} is an Open Source framework for building scalable architecture research prototypes from 1 to 500 million cores.
 
 Figure \ref{fig:openpitonariane} shows the proposed architecture by OpenPiton designers. First, each Ariane core has its L1 cache and then an adapter for the OpenPiton cache. Next, a P-Mesh controller is attached to each core with an additional cache (L1.5), routing and a shared and distributed L2 cache with a directory-based coherence protocol. Then a 2D-mesh is formed with the tiles (P-mesh controller + Ariane core). 
 
@@ -31,7 +31,7 @@ Ariane is composed by many subprojects, which made the understanding of the code
 We decided to try another core because of the considerable complexity of the project and the knowledge needed to make the portability to our board possible.
 
 \subsection{Rocketchip}
-Rocketchip is a \gls{soc} generator designed at the University of Berkeley, California \cite{rocket}. From a configuration, it generates the full implementation, including multiple cores, caches and coherence protocol. It uses Chisel\footnote{\url{https://github.com/chipsalliance/chisel3}} as \gls{hdl}, a Scala-based language for \gls{asic} and \gls{fpga} logic designs. It implements the RISCV64G \gls{isa} variant. It is capable of booting Linux and allow different multicore configurations.
+Rocketchip is a \gls{soc} generator designed at the University of Berkeley, California \cite{rocket}. From a configuration, it generates the full implementation, including multiple cores, caches and coherence protocol. It uses Chisel\footnote{\url{https://github.com/chipsalliance/chisel3}} as \gls{hdl}, a Scala-based language for \gls{asic} and \gls{fpga} logic designs. It implements the RISCV64G \gls{isa} variant. It is capable of booting Linux and allow different multi-core configurations.
 
 Figure \ref{fig:rocketstruct} shows \gls{soc} structure. The Rocketchip uses Rocket, BOOM or Zscale cores as a basic unit. Each core has its L1 data and instruction caches and a RoCC coprocessor. These units (Tiles) are interconnected using Tilelink, which interconnects the tiles with the level two cache. Tilelink is flexible and allows different cache coherence protocols. Finally, an \gls{axi} bridge connects the Tilelink module with the \gls{axi} crossbar, enabling the cores to access various devices and peripherals such as the \gls{dram}, \gls{io} devices.
 
@@ -47,7 +47,7 @@ When trying to deploy the Rocketchip \gls{soc}, we found out many difficulties. 
 \subsection{Darkriscv}
 From the previous experience, we decided to take a different approach. We looked for a core that seems simple to deploy to our board and understand and then make the necessary modifications to accomplish project objectives.
 
-Darkriscv\cite{darkriscv} is a tiny and naive core that implements most of the RISCV32E and RISCV32I extensions. It uses few \gls{fpga} resources, and it has been tested on similar \gls{fpga} boards. The core is not designed to be multicore either to boot Linux. Therefore, we decided to rephrase the project objectives and defined new ones. First, to deploy Darkriscv into our \gls{fpga}, modify the design to be multicore capable, including a simple coherence system and boot simple programs to test the multicore design.
+Darkriscv\cite{darkriscv} is a tiny and naive core that implements most of the RISCV32E and RISCV32I extensions. It uses few \gls{fpga} resources, and it has been tested on similar \gls{fpga} boards. The core is not designed to be multi-core either to boot Linux. Therefore, we decided to rephrase the project objectives and defined new ones. First, to deploy Darkriscv into our \gls{fpga}, modify the design to be multi-core capable, including a simple coherence system and boot simple programs to test the multi-core design.
 
 Its simplicity makes the design easy to understand, which enabled us to make the necessary modifications towards generating a bitstream for our \gls{fpga}.
 
