@@ -1,6 +1,6 @@
-\section{\gls{fpga}}
+\section{\gls{FPGA}}
 
-A field-programmable gate array (FPGA) is a integrated circuit designed to be configured after the manufacturing. FPGAs can be used to test and debug implementations of hardware circuits and can be configured as hardware accelerators. In this project, we have use a Xilinx FPGA to simulate and test the design of a multi core RISC-V. This section is dedicated to introduce the main characteristics of an FPGA, its architecture and an overview of the resources available on the FPGA board that we have used
+A field-programmable gate array (\gls{FPGA}) is a integrated circuit designed to be configured after the manufacturing. FPGAs can be used to test and debug implementations of hardware circuits and can be configured as hardware accelerators. In this project, we have use a Xilinx \gls{FPGA} to simulate and test the design of a multi-core RISC-V. This section is dedicated to introduce the main characteristics of an \gls{FPGA}, its architecture and an overview of the resources available on the \gls{FPGA} board that we have used.
 
 \subsection{FPGA Architecture}
 An FPGA has a regular structure of logic cell or modules that are interconnected in a matrix form. The main components are:
@@ -21,7 +21,7 @@ As it is shown in figure \ref{fig:fpga}, the components are distributed in a reg
 \end{figure}
 
 \subsection{Xilinx Spartan 7 SP701} \label{sec:fpga}
-Xilinx Spartan 7 SP701 is the model of the board where we will run a RISC-V core. It is built for designs requiring sensor fusion such as industrial networking, embedded vision, and automotive applications. This product is uncommon material since the specialized target of users and the high cost. At this point, it is important to distinguish between the board and the FPGA chip. The XC7S100 is the Spartan Series 7 chips which is assembled in the board. The resources available are:  
+Xilinx Spartan 7 SP701 is the model of the board where we will run a RISC-V core. It is built for designs requiring sensor fusion such as industrial networking, embedded vision, and automotive applications. This product is uncommon material since the specialized target of users and the high cost. At this point, it is important to distinguish between the board and the FPGA chip. The XC7S100 is the Spartan Series 7 chips which is assembled in the board. The resources available are \cite{xilinxsp}:  
 
 \begin{itemize}
 	\item \textbf{FPGA chip:}
