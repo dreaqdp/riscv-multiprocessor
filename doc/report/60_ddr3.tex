@@ -1,6 +1,7 @@
 \section{\acrshort{ddr}}
 \subsection{Justification}
 After implementing and validating a multi-core and referee design, the next step that we faced was replacing the \textit{fake} memory with the \gls{fpga}'s \gls{ddr}.
+The mentioned \textit{fake} memory is a memory implemented in \gls{rtl}. It means, that it is mapped on the \gls{fpga}'s resources and it contains a hardcoded fix delay to simulate a real \gls{ddr} memory.
 
 As mentioned in Section \ref{sec:fpga}, \gls{sp7} has an integrated \gls{ddr} memory of 4 Gb.
 We wanted to connect our current multi-core \gls{rtl} to \gls{ddr} since memory was a one with dummy cycles to simulate memory delay. 
