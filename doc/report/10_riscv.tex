@@ -1,17 +1,17 @@
 \section{RISC-V}
 
-RISC-V is an open standard instruction set architecture (\gls{ISA}) based in the reduced instruction set computer (\gls{RISC}) architecture. This architecture is based on a small and highly optimized instructions in contrast with other types of architectures like the complex instruction set computer (\gls{CISC}). The RISC-V \gls{ISA} does not need fees to use and several companies and projects  are considering this architecture to develop their products. In addition, open source operating systems with RISC-V support are available and the instruction set is supported in several popular software toolchains. Load-store architecture and IEEE-754 floating point instructions. \\
+RISC-V is an open standard instruction set architecture (\gls{isa}) based in the reduced instruction set computer (\gls{risc}) architecture. This architecture is based on a small and highly optimized instructions in contrast with other types of architectures like the complex instruction set computer (\gls{cisc}). The RISC-V \gls{isa} does not need fees to use and several companies and projects  are considering this architecture to develop their products. In addition, open source operating systems with RISC-V support are available and the instruction set is supported in several popular software toolchains. Load-store architecture and IEEE-754 floating point instructions. \\
 
 \subsection{History}
 
 Prof. Krste Asanović and graduate students Yunsup Lee and Andrew Waterman started the RISC-V instruction set in May 2010 \cite{riscvh} as part of the Parallel Computing Laboratory (Par Lab) at UC Berkeley, California. The initial purpose of the RISC - V was to offer an open source hardware that could be used for academic purposes and it could be deployable in any hardware or software design without royalties.\\
 
-The architecture has as a precedent the DLX MIPS instruction set by David Patterson. David Patterson joined the project and was the originator of the Berkeley RISC. RISC-V is the fifth generation of a series of cooperative RISC-based research projects. The authors and their institutions originally sourced the ISA documents and several CPU designs which would allow derivative work to be rather open and free or close and property. The \gls{ISA} specification was published in 2011  with all rights reserved. \\
+The architecture has as a precedent the DLX MIPS instruction set by David Patterson. David Patterson joined the project and was the originator of the Berkeley RISC. RISC-V is the fifth generation of a series of cooperative RISC-based research projects. The authors and their institutions originally sourced the ISA documents and several CPU designs which would allow derivative work to be rather open and free or close and property. The \gls{isa} specification was published in 2011  with all rights reserved. \\
 
-RISC-V foundation was created to own, maintain, and publish intellectual property related to RISC-V's definition. Commercial users needed a stable \gls{ISA} to develop products that would be used for years. For this reason, the authors and owners had to give their rights to the foundation. The foundation moved from US to Switzerland concerning the US trade conditions in 2019. Its named changed to RISC-V International and since then they have freely published the documents defining RISC-V and permits unrestricted use of the \gls{ISA} for design of software and hardware. However, changes can only be accepted by the members of the foundation. \\
+RISC-V foundation was created to own, maintain, and publish intellectual property related to RISC-V's definition. Commercial users needed a stable \gls{isa} to develop products that would be used for years. For this reason, the authors and owners had to give their rights to the foundation. The foundation moved from US to Switzerland concerning the US trade conditions in 2019. Its named changed to RISC-V International and since then they have freely published the documents defining RISC-V and permits unrestricted use of the \gls{isa} for design of software and hardware. However, changes can only be accepted by the members of the foundation. \\
 
-\subsection{\gls{ISA} base and extensions} 
-One of the more interesting characteristics about RISC-V is the popularity and this is reflected in the \gls{ISA} extensions that consist in alternative base and optional extensions. The base can implement a simplified general-purpose computer including compilers. It specifies: 
+\subsection{\gls{isa} base and extensions} 
+One of the more interesting characteristics about RISC-V is the popularity and this is reflected in the \gls{isa} extensions that consist in alternative base and optional extensions. The base can implement a simplified general-purpose computer including compilers. It specifies: 
 
 \begin{itemize}
 	\item Instructions and their encoding
@@ -21,7 +21,7 @@ One of the more interesting characteristics about RISC-V is the popularity and t
 	\item Logic manipulation
 \end{itemize}
 
-In table \ref{tab:isa}, the \gls{ISA} modules are listed and described:
+In table \ref{tab:isa}, the \gls{isa} modules are listed and described:
 
 \begin{table}[H]
 \centering
@@ -29,14 +29,14 @@ In table \ref{tab:isa}, the \gls{ISA} modules are listed and described:
 \hline
 \textbf{Name} & \textbf{Description} & \textbf{Status}  & \textbf{Ins. Count}  \\ \hline
 
-\multicolumn{4}{|c|}{\textbf{\gls{ISA} base}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{\gls{isa} base}} \\ \hline
 RVWMO & Weak Memory Ordering & Ratified & \\ \hline
 RV32I & Base Integer Instruction set (32 bits) & Ratified & 49 \\ \hline
 RV32E & Base Integer Instruction set embedded & Open & 49 \\ \hline
 RV64I & Base Integer Instruction set (64 bits) & Ratified & 14 \\ \hline
 RV128I & Base Integer Instruction set (128 bits) & Open & 14 \\ \hline
 
-\multicolumn{4}{|c|}{\textbf{\gls{ISA} extensions}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{\gls{isa} extensions}} \\ \hline
 
 M & Multiplication Division & Ratified & 8\\ \hline
 A & Atomic Instruction & Ratified & 11 \\ \hline
@@ -47,11 +47,11 @@ C & Compressed Instruction & Ratified & 36 \\ \hline
 Zicsr & Control and Status Register (CSR) & Ratified &  \\ \hline
 Zifencei & Instruction-Fetch Fence & Ratified & \\ \hline
 \end{tabular}
-\caption{RISC-V popular \gls{ISA} modules.} Reproduced from \cite{riscvg}.
+\caption{RISC-V popular \gls{isa} modules.} Reproduced from \cite{riscvg}.
 \label{tab:isa}
 \end{table}
 
-Required \gls{ISA} modules it is a characteristic to evaluate possible RISC-V cores depending on the functionalities the developers want to offer.
+Required \gls{isa} modules it is a characteristic to evaluate possible RISC-V cores depending on the functionalities the developers want to offer.
 
 \subsection{Registers}
 RISC-V cores typically have 32 integer registers and 32 floating-point registers when this extension is implemented. Each register has its functionality that is a consensus of the RISC-V developers. This is the method to keep information consistent and meaningful. In \ref{tab:riscreg} we can see the registers' convention.
